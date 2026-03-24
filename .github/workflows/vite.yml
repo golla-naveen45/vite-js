@@ -29,9 +29,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # ✅ Upload only CSS (correct path)
+      # 🔍 Debug (fixed indentation)
+      - name: Debug dist folder
+        run: |
+          ls -R dist
+
+      # ✅ Upload CSS
       - name: Upload CSS
         uses: actions/upload-artifact@v4
         with:
           name: compiled-css
-          path: web/themes/custom/mytheme/dist/*.css
+          path: web/themes/custom/mytheme/dist/css/*.css
