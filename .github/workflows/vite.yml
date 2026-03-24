@@ -4,16 +4,14 @@ on:
   push:
     branches:
       - vite
-  pull_request:
-    branches:
-      - vite
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # ✅ future-ready
+    defaults:
+      run:
+        working-directory: web/themes/custom/mytheme   # ✅ important
 
     steps:
       - name: Checkout code
@@ -22,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20   # or 18/20 depending on your project
+          node-version: 20
           cache: 'npm'
 
       - name: Install dependencies
