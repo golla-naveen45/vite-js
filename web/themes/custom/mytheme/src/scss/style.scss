@@ -1,0 +1,42 @@
+$color-white: #fff;
+$color-black: #00000030;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: $color-black;
+}
+body {
+  background-color: red;
+}
+footer {
+  background-color: #fff;
+}
+h2 {
+  // background-image: url('../../assets/images/generated-image.png');
+  background-image: url('../assets/images/generated-image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h2 {
+  background-image: url('../assets/images/generated-image.png');
+}
+
+
+.card {
+  .title {
+    .text {
+         color: $color-white;
+
+            card {
+         color: #000;
+         margin: 0;
+
+
+
+
+      }
+    }
+  }
+}
+

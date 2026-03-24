@@ -1,0 +1,21 @@
+# DDEV
+.ddev/.dbimageBuild/
+.ddev/.webimageBuild/
+
+# Drupal (Composer-based)
+vendor/
+web/core/
+web/modules/contrib/
+web/themes/contrib/
+
+# Files (uploads)
+web/sites/default/files/
+
+# Sensitive files
+web/sites/default/settings.php
+
+# Node
+node_modules/
+
+# OS
+.DS_Store

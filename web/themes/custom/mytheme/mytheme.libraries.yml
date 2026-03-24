@@ -1,0 +1,9 @@
+global:
+  css:
+    theme:
+      dist/css/style.css: {}
+      dist/css/card.css: {}
+  js:
+    dist/js/main.js: {}
+  dependencies:
+    - core/drupal

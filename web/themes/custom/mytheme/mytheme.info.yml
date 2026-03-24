@@ -1,0 +1,13 @@
+name: My Theme
+type: theme
+description: Custom Drupal 10 theme with Webpack
+core_version_requirement: ^10 || ^11
+base theme: olivero
+
+libraries:
+  - mytheme/global
+
+regions:
+  header: Header
+  content: Content
+  footer: Footer
