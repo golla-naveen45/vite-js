@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: web/themes/custom/mytheme   # ✅ important
+        working-directory: web/themes/custom/mytheme
 
     steps:
       - name: Checkout code
@@ -28,3 +28,10 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      # ✅ Upload only CSS (correct path)
+      - name: Upload CSS
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-css
+          path: web/themes/custom/mytheme/dist/*.css
