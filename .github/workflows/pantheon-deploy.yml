@@ -18,12 +18,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd web/themes/custom/your-theme
+          cd web/themes/custom/my-theme
           npm install
 
       - name: Build Vite
         run: |
-          cd web/themes/custom/your-theme
+          cd web/themes/custom/my-theme
           npm run build
 
       - name: Setup SSH
@@ -41,7 +41,7 @@ jobs:
         run: |
           git config --global user.name "CI Bot"
           git config --global user.email "ci@example.com"
-          git add web/themes/custom/your-theme/dist
+          git add web/themes/custom/my-theme/dist
           git commit -m "Build assets" || echo "No changes"
 
       - name: Push to Pantheon
