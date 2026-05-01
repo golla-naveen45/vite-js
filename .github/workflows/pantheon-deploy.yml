@@ -1,3 +1,5 @@
+name: Build & Deploy to Pantheon
+
 on:
   push:
     branches:
@@ -8,24 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      # 2. Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
 
+      # 3. Install dependencies
       - name: Install dependencies
-        run: |
-          cd web/themes/custom/mytheme
-          npm install
+        run: npm install
+        working-directory: web/themes/custom/mytheme
 
-      - name: Build Vite
-        run: |
-          cd web/themes/custom/mytheme
-          npm run build
+      # 4. Build Vite assets
+      - name: Build assets
+        run: npm run build
+        working-directory: web/themes/custom/mytheme
 
+      # 5. Setup SSH for Pantheon
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -33,17 +38,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p 2222 codeserver.dev.2d7e7bcd-42b3-489c-aeac-d2dd64690412.drush.in >> ~/.ssh/known_hosts
 
-      - name: Add Pantheon remote
+      # 6. Deploy to Pantheon
+      - name: Deploy
         run: |
-          git remote add pantheon ssh://codeserver.dev.2d7e7bcd-42b3-489c-aeac-d2dd64690412@codeserver.dev.2d7e7bcd-42b3-489c-aeac-d2dd64690412.drush.in:2222/~/repository.git
+          git config --global user.email "you@example.com"
+          git config --global user.name "github-actions"
 
-      - name: Commit build artifacts
-        run: |
-          git config --global user.name "CI Bot"
-          git config --global user.email "ci@example.com"
-          git add web/themes/custom/mytheme/dist
-          git commit -m "Build assets" || echo "No changes"
+          git remote add pantheon ${{ secrets.PANTHEON_GIT_URL }}
 
-      - name: Push to Pantheon
-        run: |
-          git push pantheon HEAD:master
+          git push pantheon HEAD:master --force
